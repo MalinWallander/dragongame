@@ -1,5 +1,5 @@
 package dragongame;
 
-public class Main {
+public class Game {
 
 }
