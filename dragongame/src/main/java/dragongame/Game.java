@@ -13,7 +13,7 @@ public class Game {
 		Door entranceToGreatHall = new Door(greatHall, "öster");
 		Door entranceToLibrary = new Door(library, "söder");
 		Door entrenceToArmory = new Door(armory, "öster");
-		Door entrenceToArmory = new Door(entrance, "south");
+		Door entrenceToArmory = new Door(armory, "south");
 		Door door4 = new Door(entrance, "norr");
 
 		entrance.setExit("öster", entranceToGreatHall);
