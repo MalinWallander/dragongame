@@ -13,15 +13,19 @@ public class Player {
 		return currentRoom;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void move(String direction) {
 		Room next = currentRoom.getNextRoom(direction);
 
 		if (next != null) {
 			currentRoom = next;
-			System.out.println("Du går " + direction + " till " + currentRoom.getName() + ".");
+			System.out.println("You are walking " + direction + " to " + currentRoom.getName() + ".");
 			currentRoom.roomNarrative();
 		} else {
-			System.out.println("Det finns ingen utgång i den riktningen.");
+			System.out.println("There is no door in that direction");
 		}
 	}
 }
