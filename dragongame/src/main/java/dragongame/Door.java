@@ -1,4 +1,4 @@
-cpackage dragongame;
+package dragongame;
 
 public class Door {
 
