@@ -54,9 +54,32 @@ public class Game {
 		Door prisonChambersToCatacombs = new Door(catacombs, "east");
 		Door catacombsToPrisonChambers = new Door(prisonChambers, "west");
 
-		entrance.setExit("öster", entranceToGreatHall);
+		entrance.setExit("east", entranceToGreatHall);
+		greatHall.setExit("west", greatHallToEntrance);
+		entrance.setExit("south", entranceToLibrary);
+		library.setExit("north", libraryToEntrance);
+		entrance.setExit("up", entrenceToWatchTower);
+		watchTower.setExit("down", watchTowertoEntrance);
+		greatHall.setExit("south", greatHallToArmory);
+		armory.setExit("north", armoryToGreatHall);
+		greatHall.setExit("north", greatHalltoKitchen);
+		kitchen.setExit("south", kitchenToGreatHall);
+		armory.setExit("west", armoryToLibrary);
+		library.setExit("east", libraryToArmory);
+		armory.setExit("up", armoryToHighTower);
+		highTower.setExit("down", highTowerToArmory);
+		kitchen.setExit("east", kitchenToThroneHall);
+		throneHall.setExit("west", throneHallToKitchen);
+		throneHall.setExit("down", throneHallToCatacombs);
+		catacombs.setExit("west", catacombsToArmory);
+		catacombs.setExit("north", catacombsToThroneHall);
+		armory.setExit("down", armoryToCatacombs);
+		sorceryChamber.setExit("north", sorceryChamberToPrisonChambers);
+		prisonChambers.setExit("south", prisonChambersToSorceryChamber);
+		prisonChambers.setExit("west", prisonChambersToCatacombs);
+		catacombs.setExit("east", catacombsToPrisonChambers);
 
-		player = new Player(entrance, "Äventyrare");
+		player = new Player(entrance, "Adventurer");
 
 	}
 
