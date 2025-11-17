@@ -48,7 +48,7 @@ public class Game {
 		Door throneHallToCatacombs = new Door(catacombs, "down");
 		Door catacombsToThroneHall = new Door(throneHall, "up");
 		Door armoryToCatacombs = new Door(catacombs, "down");
-		Door catacombsToArmory = new Door(library, "up");
+		Door catacombsToArmory = new Door(armory, "up");
 		Door sorceryChamberToPrisonChambers = new Door(prisonChambers, "north");
 		Door prisonChambersToSorceryChamber = new Door(sorceryChamber, "south");
 		Door prisonChambersToCatacombs = new Door(catacombs, "east");

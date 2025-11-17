@@ -36,7 +36,6 @@ public class Room {
 
 	public void roomNarrative() {
 		System.out.println(description);
-		System.out.println("Utgångar: " + exits.keySet());
 	}
 
 }
