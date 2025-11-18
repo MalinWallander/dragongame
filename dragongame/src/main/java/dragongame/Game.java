@@ -1,124 +1,132 @@
 package dragongame;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Game {
-	private Player player;
 
-	public void setUpField() {
-		Room entrance = new Room("Entrance",
-				"You stand in the castle's main entry hall. Cold wind sweeps through the cracked stone doorway, and flickering torches cast long shadows. You have a door to the east (e), a passageway to the south (s), and a winding staircase leading up (u). Type where you want to go.");
-		Room greatHall = new Room("Great Hall",
-				"A massive dining table dominates the room. Melted wax drips from tall candles, and faint echoes of old banquets linger in the air.");
-		Room library = new Room("Library",
-				"Towering shelves filled with ancient tomes surround you. A faint whisper seems to drift between the pages.");
-		Room armory = new Room("Armory",
-				"Swords, shields, and ornate armor line the walls. Some pieces look well-polished, as if recently used.");
-		Room kitchen = new Room("Kitchen",
-				"Iron pots still simmer as if someone left in a hurry. The scent of herbs, smoke, and something slightly burnt hangs in the room.");
-		Room throneHall = new Room("Throne Hall",
-				"A grand chamber crowned by a dusty throne. The air feels heavy, as though unseen eyes are watching from the shadows.");
-		Room watchTower = new Room("Watch Tower",
-				"From this high vantage point, you can see the surrounding lands. The wind howls, carrying distant sounds of wildlife and rustling leaves.");
-		Room highTower = new Room("High Tower",
-				"The highest point of the castle offers a panoramic view. The sky stretches endlessly, and the world below seems both distant and inviting.");
-		Room prisonChambers = new Room("Prison Chambers",
-				"Dark, damp cells line the walls. The air is thick with the scent of mildew and despair, and faint echoes of past prisoners seem to linger.");
-		Room sorceryChamber = new Room("Sorcery Chamber",
-				"Arcane symbols are etched into the stone floor, glowing faintly. Shelves filled with mystical artifacts and ancient scrolls surround you.");
-		Room catacombs = new Room("Catacombs",
-				"Endless tunnels stretch into darkness, lined with skulls and bones. The air is cold, and every sound echoes eerily. You see a faint light in the distance.");
-		Room exit = new Room("Exit",
-				"You have found the exit of the castle! Sunlight pours in, and you can see the open world beyond. Freedom is just a step away.");
-		Room start = new Room("Start",
-				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. If you for any reason want to stop playing, type 'stop'. Good luck!");
+    private Player player;
 
-		Door entranceToGreatHall = new Door(greatHall, "east");
-		Door greatHallToEntrance = new Door(entrance, "west");
-		Door entranceToLibrary = new Door(library, "south");
-		Door libraryToEntrance = new Door(entrance, "north");
-		Door entrenceToWatchTower = new Door(watchTower, "up");
-		Door watchTowertoEntrance = new Door(entrance, "down");
-		Door greatHallToArmory = new Door(armory, "south");
-		Door armoryToGreatHall = new Door(greatHall, "north");
-		Door greatHalltoKitchen = new Door(kitchen, "north");
-		Door kitchenToGreatHall = new Door(greatHall, "south");
-		Door armoryToLibrary = new Door(library, "west");
-		Door libraryToArmory = new Door(armory, "east");
-		Door armoryToHighTower = new Door(highTower, "up");
-		Door highTowerToArmory = new Door(armory, "down");
-		Door kitchenToThroneHall = new Door(throneHall, "east");
-		Door throneHallToKitchen = new Door(kitchen, "west");
-		Door throneHallToCatacombs = new Door(catacombs, "down");
-		Door catacombsToThroneHall = new Door(throneHall, "up");
-		Door armoryToCatacombs = new Door(catacombs, "down");
-		Door catacombsToArmory = new Door(armory, "up");
-		Door sorceryChamberToPrisonChambers = new Door(prisonChambers, "north");
-		Door prisonChambersToSorceryChamber = new Door(sorceryChamber, "south");
-		Door prisonChambersToCatacombs = new Door(catacombs, "east");
-		Door catacombsToPrisonChambers = new Door(prisonChambers, "west");
-		Door sorceryChamberToExit = new Door(exit, "west");
-		Door startToEntrance = new Door(entrance, "enter");
+    // Alias → fullständiga riktningar
+    private static final Map<String, String> directionAliases = Map.ofEntries(
+        Map.entry("n", "north"),
+        Map.entry("s", "south"),
+        Map.entry("e", "east"),
+        Map.entry("w", "west"),
+        Map.entry("u", "up"),
+        Map.entry("d", "down"),
+        Map.entry("f", "forward"),
+        Map.entry("enter", "forward")
+    );
 
-		entrance.setExit("east", entranceToGreatHall);
-		greatHall.setExit("west", greatHallToEntrance);
-		entrance.setExit("south", entranceToLibrary);
-		library.setExit("north", libraryToEntrance);
-		entrance.setExit("up", entrenceToWatchTower);
-		watchTower.setExit("down", watchTowertoEntrance);
-		greatHall.setExit("south", greatHallToArmory);
-		armory.setExit("north", armoryToGreatHall);
-		greatHall.setExit("north", greatHalltoKitchen);
-		kitchen.setExit("south", kitchenToGreatHall);
-		armory.setExit("west", armoryToLibrary);
-		library.setExit("east", libraryToArmory);
-		armory.setExit("up", armoryToHighTower);
-		highTower.setExit("down", highTowerToArmory);
-		kitchen.setExit("east", kitchenToThroneHall);
-		throneHall.setExit("west", throneHallToKitchen);
-		throneHall.setExit("down", throneHallToCatacombs);
-		catacombs.setExit("west", catacombsToArmory);
-		catacombs.setExit("north", catacombsToThroneHall);
-		armory.setExit("down", armoryToCatacombs);
-		sorceryChamber.setExit("north", sorceryChamberToPrisonChambers);
-		prisonChambers.setExit("south", prisonChambersToSorceryChamber);
-		prisonChambers.setExit("west", prisonChambersToCatacombs);
-		catacombs.setExit("east", catacombsToPrisonChambers);
-		start.setExit("forward", startToEntrance);
-		sorceryChamber.setExit("west", sorceryChamberToExit);
+    // Översätter spelarkommandon → fullständig riktning
+    private String parseDirection(String input) {
 
-		player = new Player(entrance, "Adventurer");
+    // Om spelaren skriver exakt riktningen ("east")
+        for (String fullDir : directionAliases.values()) {
+            if (input.equals(fullDir)) {
+                return fullDir;
+            }
+        }
 
-	}
+    // Om spelaren skriver kort ("e", "ea", "eas")
+        for (Map.Entry<String, String> entry : directionAliases.entrySet()) {
+            if (input.startsWith(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
 
-	public void playGame() {
-		Scanner scanner = new Scanner(System.in);
-		String command;
-		boolean playing = true;
+        return null; // Ogiltigt kommando
+    }
 
-		player.getCurrentRoom().roomNarrative();
+    public void setUpField() {
+        Room entrance = new Room("Entrance",
+            "You stand in the castle's main entry hall. Cold wind sweeps through the cracked stone doorway...");
+        Room greatHall = new Room("Great Hall",
+            "A massive dining table dominates the room...");
+        Room library = new Room("Library",
+            "Towering shelves filled with ancient tomes surround you...");
+        Room armory = new Room("Armory",
+            "Swords, shields, and ornate armor line the walls...");
+        Room kitchen = new Room("Kitchen",
+            "Iron pots still simmer as if someone left in a hurry...");
+        Room throneHall = new Room("Throne Hall",
+            "A grand chamber crowned by a dusty throne...");
+        Room watchTower = new Room("Watch Tower",
+            "From this high vantage point, you can see the surrounding lands...");
+        Room highTower = new Room("High Tower",
+            "The highest point of the castle offers a panoramic view...");
+        Room prisonChambers = new Room("Prison Chambers",
+            "Dark, damp cells line the walls...");
+        Room sorceryChamber = new Room("Sorcery Chamber",
+            "Arcane symbols are etched into the stone floor...");
+        Room catacombs = new Room("Catacombs",
+            "Endless tunnels stretch into darkness...");
+        Room exit = new Room("Exit",
+            "You have found the exit! Sunlight pours in...");
+        Room start = new Room("Start",
+            "Welcome to the dragon adventure game!...");
 
-		while (playing) {
-			System.out.print("> ");
-			command = scanner.nextLine().trim().toLowerCase();
+        // Doors
+        entrance.setExit("east", new Door(greatHall, "east"));
+        greatHall.setExit("west", new Door(entrance, "west"));
+        entrance.setExit("south", new Door(library, "south"));
+        library.setExit("north", new Door(entrance, "north"));
+        entrance.setExit("up", new Door(watchTower, "up"));
+        watchTower.setExit("down", new Door(entrance, "down"));
+        greatHall.setExit("south", new Door(armory, "south"));
+        armory.setExit("north", new Door(greatHall, "north"));
+        greatHall.setExit("north", new Door(kitchen, "north"));
+        kitchen.setExit("south", new Door(greatHall, "south"));
+        armory.setExit("west", new Door(library, "west"));
+        library.setExit("east", new Door(armory, "east"));
+        armory.setExit("up", new Door(highTower, "up"));
+        highTower.setExit("down", new Door(armory, "down"));
+        kitchen.setExit("east", new Door(throneHall, "east"));
+        throneHall.setExit("west", new Door(kitchen, "west"));
+        throneHall.setExit("down", new Door(catacombs, "down"));
+        catacombs.setExit("up", new Door(throneHall, "up"));
+        armory.setExit("down", new Door(catacombs, "down"));
+        sorceryChamber.setExit("north", new Door(prisonChambers, "north"));
+        prisonChambers.setExit("south", new Door(sorceryChamber, "south"));
+        prisonChambers.setExit("east", new Door(catacombs, "east"));
+        catacombs.setExit("west", new Door(prisonChambers, "west"));
+        start.setExit("forward", new Door(entrance, "forward"));
+        sorceryChamber.setExit("west", new Door(exit, "west"));
 
-			if (command.equals("stop")) {
-				System.out.println("Thank you for playing!");
-				break;
-			} else if (command.startsWith(command)) {
-				String direction = command;
-				player.move(direction);
-			} else {
-				System.out.println("I don't understand that command.");
-			}
-		}
+        player = new Player(entrance, "Adventurer");
+    }
 
-		scanner.close();
-	}
+    public void playGame() {
+        Scanner scanner = new Scanner(System.in);
+        String command;
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.setUpField();
-		game.playGame();
-	}
+        player.getCurrentRoom().roomNarrative();
+
+        while (true) {
+            System.out.print("> ");
+            command = scanner.nextLine().trim().toLowerCase();
+
+            if (command.equals("stop")) {
+                System.out.println("Thank you for playing!");
+                break;
+            }
+
+            String direction = parseDirection(command);
+
+            if (direction != null) {
+                player.move(direction);
+            } else {
+                System.out.println("I don't understand that command.");
+            }
+        }
+
+        scanner.close();
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.setUpField();
+        game.playGame();
+    }
 }
