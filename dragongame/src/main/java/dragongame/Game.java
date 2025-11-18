@@ -100,17 +100,17 @@ public class Game {
      public void playGame() {
         Scanner scanner = new Scanner(System.in);
         String command;
-        boolean playing = true; // Återinfört boolean
+        boolean playing = true; 
 
         player.getCurrentRoom().roomNarrative();
 
-        while (playing) { // Loop styrs av boolean
+        while (playing) { 
             System.out.print("> ");
             command = scanner.nextLine().trim().toLowerCase();
 
             if (command.equals("stop")) {
                 System.out.println("Thank you for playing!");
-                playing = false; // Sätter loopen till false istället för break
+                playing = false; 
             } else {
                 String direction = parseDirection(command);
                 if (direction != null) {
