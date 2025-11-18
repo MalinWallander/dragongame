@@ -97,27 +97,27 @@ public class Game {
         player = new Player(entrance, "Adventurer");
     }
 
-    public void playGame() {
+     public void playGame() {
         Scanner scanner = new Scanner(System.in);
         String command;
+        boolean playing = true; // Återinfört boolean
 
         player.getCurrentRoom().roomNarrative();
 
-        while (true) {
+        while (playing) { // Loop styrs av boolean
             System.out.print("> ");
             command = scanner.nextLine().trim().toLowerCase();
 
             if (command.equals("stop")) {
                 System.out.println("Thank you for playing!");
-                break;
-            }
-
-            String direction = parseDirection(command);
-
-            if (direction != null) {
-                player.move(direction);
+                playing = false; // Sätter loopen till false istället för break
             } else {
-                System.out.println("I don't understand that command.");
+                String direction = parseDirection(command);
+                if (direction != null) {
+                    player.move(direction);
+                } else {
+                    System.out.println("I don't understand that command.");
+                }
             }
         }
 
