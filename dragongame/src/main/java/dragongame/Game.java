@@ -28,6 +28,10 @@ public class Game {
 				"Arcane symbols are etched into the stone floor, glowing faintly. Shelves filled with mystical artifacts and ancient scrolls surround you.");
 		Room catacombs = new Room("Catacombs",
 				"Endless tunnels stretch into darkness, lined with skulls and bones. The air is cold, and every sound echoes eerily. You see a faint light in the distance.");
+		Room exit = new Room("Exit",
+				"You have found the exit of the castle! Sunlight pours in, and you can see the open world beyond. Freedom is just a step away.");
+		Room start = new Room("Start",
+				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
 		Door entranceToGreatHall = new Door(greatHall, "east");
 		Door greatHallToEntrance = new Door(entrance, "west");
@@ -53,6 +57,8 @@ public class Game {
 		Door prisonChambersToSorceryChamber = new Door(sorceryChamber, "south");
 		Door prisonChambersToCatacombs = new Door(catacombs, "east");
 		Door catacombsToPrisonChambers = new Door(prisonChambers, "west");
+		Door sorceryChamberToExit = new Door(exit, "west");
+		Door startToEntrance = new Door(entrance, "enter");
 
 		entrance.setExit("east", entranceToGreatHall);
 		greatHall.setExit("west", greatHallToEntrance);
@@ -78,6 +84,8 @@ public class Game {
 		prisonChambers.setExit("south", prisonChambersToSorceryChamber);
 		prisonChambers.setExit("west", prisonChambersToCatacombs);
 		catacombs.setExit("east", catacombsToPrisonChambers);
+		start.setExit("forward", startToEntrance);
+		sorceryChamber.setExit("west", sorceryChamberToExit);
 
 		player = new Player(entrance, "Adventurer");
 
@@ -88,8 +96,6 @@ public class Game {
 		String command;
 		boolean playing = true;
 
-		System.out.println(
-				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. If you for any reason want to stop playing, type 'stop'. Good luck!");
 		player.getCurrentRoom().roomNarrative();
 
 		while (playing) {
