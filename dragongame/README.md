@@ -54,6 +54,8 @@ iterera över alla rum vid behov.
 
 Klasser & Ansvar
 
+Anledningen till ArrayList<Room> och inte en vanlig array är att vi vill kunna utveckla spelet och att det ska vara mer dynamiskt. vi är medvetna om att en array tar mindre plats och kan göra spelet långsammare men vi tycker att fördelarna med en array list överväger. 
+
 
 Game:
 
