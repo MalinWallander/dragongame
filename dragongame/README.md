@@ -105,6 +105,8 @@ Jag lade till fler rum (9 rum istället för 5–6) för att kartan skulle känn
 
 Jag valde att lagra dörrar i en HashMap<String, Door> för snabb åtkomst via riktningar (om detta är sant för din implementation).
 
+Jag valde att lägga till  Map<String, String> directionAliases för att göra spelet mer effektivt för spelaren om den gör ett kommando som endast liknar de fyra väderstrecken. Detta minskar risken för att systemet krachar och även mer användarvänligt/utesluter felmeddelanden.
+
 Jag valde att använda engelska som spelspråk trots svensk uppgiftsbeskrivning.
 
 Jag valde att göra spel-loopen textbaserad utan GUI för att fokusera på objektorienterad design.
