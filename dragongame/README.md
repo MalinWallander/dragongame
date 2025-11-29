@@ -1,33 +1,17 @@
-Projektbeskrivning
+Projektbeskrivning:
 
 Det här projektet är ett textbaserat äventyrsspel skapat i Java. Spelaren utforskar en gammal ruin, Eldrath’s Castle, ett drakförstört slott med flera rum som kan nås genom att navigera i väderstreck (north, south, east, west).
 Spelets första del fokuserar på navigering, rumsbeskrivningar och spelstruktur, inte strid eller föremål.
 
 Projektet följer uppgiftens krav på objektorienterad design och använder ett antal klasser (Game, Room, Door, Player) som samarbetar för att skapa en fungerande spelvärld.
 
-Spelvärld & Designidé
+Spelvärld & Designidé:
 
 Spelet utspelar sig i en fantasy-miljö där spelaren stiger in i ruinen av det gamla drakslottet Eldrastens Ruin. Rummen är designade för att ge stämning, tydlig navigering och möjlighet till framtida utbyggnad (strider, föremål, NPC:er).
 
 Spelet innehåller följande rum:
 
-Castle Courtyard
-
-Great Hall
-
-Old Armory
-
-Ancient Library
-
-Prison Dungeon
-
-Sorcery Chamber
-
-High Tower
-
-Throne Hall
-
-Dragon Catacombs
+Castle Courtyard, Great Hall, Old Armory, Ancient Library, Prison Dungeon, Sorcery Chamber, High Tower, Throne Hall, Dragon Catacombs.
 
 Alla rum har:
 
