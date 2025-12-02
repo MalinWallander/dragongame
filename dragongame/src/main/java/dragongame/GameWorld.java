@@ -7,7 +7,7 @@ import java.util.List;
 public class GameWorld {
 
 	private List<Room> rooms = new ArrayList<>();
-	private Player player;
+	private Room start;
 
 	private void registerRooms(Room... roomArray) {
 
@@ -39,7 +39,7 @@ public class GameWorld {
 				"Endless tunnels stretch into darkness, lined with skulls and bones. The air is cold, and every sound echoes eerily. You see a faint light in the distance. There is a staircase going north (n) to the throne hall, a door to the east (e) leading to the prison chambers, and a door to the west (w) leading to the armory. Where do you want to go?");
 		Room exit = new Room("Exit",
 				"You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Well played, adventurer! Press enter to conclude your adventure.");
-		Room start = new Room("Start",
+		start = new Room("Start",
 				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
 		registerRooms(entrance, greatHall, library, armory, kitchen, throneHall,
@@ -72,8 +72,10 @@ public class GameWorld {
 		catacombs.setExit("west", new Door(armory, "west"));
 		start.setExit("forward", new Door(entrance, "forward"));
 		sorceryChamber.setExit("east", new Door(exit, "east"));
+	}
 
-		player = new Player(start, "Adventurer");
+	public Room getStartingRoom() {
+		return start;
 	}
 
 }

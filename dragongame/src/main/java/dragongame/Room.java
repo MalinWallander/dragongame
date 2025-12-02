@@ -23,7 +23,11 @@ public class Room {
 	}
 
 	public Room getNextRoom(String direction) {
-		return exits.get(direction).getLeadsTo();
+		Door door = exits.get(direction);
+		if (door != null) {
+			return door.getLeadsTo();
+		} else
+			return null;
 	}
 
 	public String getName() {

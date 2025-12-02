@@ -7,6 +7,12 @@ public class GameEngine {
 
     private Player player;
 
+    public GameEngine() {
+        GameWorld world = new GameWorld();
+        world.setUpField();
+        this.player = new Player(world.getStartingRoom(), "Adventurer");
+    }
+
     // Alias → fullständiga riktningar
     private static final Map<String, String> directionAliases = Map.ofEntries(
             Map.entry("n", "north"),
