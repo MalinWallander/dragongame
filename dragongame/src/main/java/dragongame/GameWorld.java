@@ -16,7 +16,7 @@ public class GameWorld {
 
 	public void setUpField() {
 		Room entrance = new Room("Entrance",
-				"You are standing in the castle's main entry hall. Cold wind sweeps through the cracked stone doorway, and flickering torches cast long shadows. You have a door to the east (e), a passageway to the south (s), and a winding staircase leading up (u). Type where you want to go.");
+				"You are standing in the castle's main entry hall. Cold wind sweeps through the cracked stone doorway, and flickering torches cast long shadows. You have a door to the east (e), a passageway to the south (s), and a locked winding staircase leading up (u). Type where you want to go.");
 		Room greatHall = new Room("Great Hall",
 				"A massive dining table dominates the room. Melted wax drips from tall candles, and faint echoes of old banquets linger in the air. There are doors in every direction: west (w) to the entrance, north (n) to the kitchen, south (s) to the armory and east (e) to the throne hall. Where do you want to go?");
 		Room library = new Room("Library",
@@ -24,7 +24,7 @@ public class GameWorld {
 		Room armory = new Room("Armory",
 				"Swords, shields, and ornate armor line the walls. Some pieces look well-polished, as if recently used. There is a door to the north (n) leading to the great hall, a door to the west (w) leading to the library, a staircase going up (u) to a high tower, and a dark passageway going down (d) to the catacombs. What is your next move?");
 		Room kitchen = new Room("Kitchen",
-				"Iron pots still simmer as if someone left in a hurry. The scent of herbs, smoke, and something slightly burnt hangs in the room. You see a door to the south (s) leading back to the great hall and a door to the east (e) leading to the throne hall. Type where you want to go");
+				"Iron pots still simmer as if someone left in a hurry. The scent of herbs, smoke, and something slightly burnt hangs in the room. You see a door to the south (s) leading back to the great hall and a locked door to the east (e) leading to the throne hall. Type where you want to go");
 		Room throneHall = new Room("Throne Hall",
 				"A grand chamber crowned by a dusty throne. The air feels heavy, as though unseen eyes are watching from the shadows. There is a door to the west (w) leading to the kitchen and a scary looking staircase going down (d) to the catacombs. Where do you want to go?");
 		Room watchTower = new Room("Watch Tower",
@@ -45,33 +45,33 @@ public class GameWorld {
 		registerRooms(entrance, greatHall, library, armory, kitchen, throneHall,
 				watchTower, highTower, prisonChambers, sorceryChamber, catacombs, exit, start);
 
-		entrance.setExit("east", new Door(greatHall, "east"));
-		greatHall.setExit("west", new Door(entrance, "west"));
-		entrance.setExit("south", new Door(library, "south"));
-		library.setExit("north", new Door(entrance, "north"));
-		entrance.setExit("up", new Door(watchTower, "up"));
-		watchTower.setExit("down", new Door(entrance, "down"));
-		greatHall.setExit("south", new Door(armory, "south"));
-		armory.setExit("north", new Door(greatHall, "north"));
-		greatHall.setExit("north", new Door(kitchen, "north"));
-		greatHall.setExit("east", new Door(throneHall, "east"));
-		kitchen.setExit("south", new Door(greatHall, "south"));
-		armory.setExit("west", new Door(library, "west"));
-		library.setExit("east", new Door(armory, "east"));
-		armory.setExit("up", new Door(highTower, "up"));
-		highTower.setExit("down", new Door(armory, "down"));
-		kitchen.setExit("east", new Door(throneHall, "east"));
-		throneHall.setExit("west", new Door(kitchen, "west"));
-		throneHall.setExit("down", new Door(catacombs, "down"));
-		catacombs.setExit("north", new Door(throneHall, "north"));
-		armory.setExit("down", new Door(catacombs, "down"));
-		sorceryChamber.setExit("north", new Door(prisonChambers, "north"));
-		prisonChambers.setExit("south", new Door(sorceryChamber, "south"));
-		prisonChambers.setExit("east", new Door(catacombs, "east"));
-		catacombs.setExit("east", new Door(prisonChambers, "east"));
-		catacombs.setExit("west", new Door(armory, "west"));
-		start.setExit("forward", new Door(entrance, "forward"));
-		sorceryChamber.setExit("east", new Door(exit, "east"));
+		entrance.setExit("east", new Door(greatHall, "east", false));
+		greatHall.setExit("west", new Door(entrance, "west", false));
+		entrance.setExit("south", new Door(library, "south", false));
+		library.setExit("north", new Door(entrance, "north", false));
+		entrance.setExit("up", new Door(watchTower, "up", true));
+		watchTower.setExit("down", new Door(entrance, "down", false));
+		greatHall.setExit("south", new Door(armory, "south", false));
+		armory.setExit("north", new Door(greatHall, "north", false));
+		greatHall.setExit("north", new Door(kitchen, "north", false));
+		greatHall.setExit("east", new Door(throneHall, "east", false));
+		kitchen.setExit("south", new Door(greatHall, "south", false));
+		armory.setExit("west", new Door(library, "west", false));
+		library.setExit("east", new Door(armory, "east", false));
+		armory.setExit("up", new Door(highTower, "up", false));
+		highTower.setExit("down", new Door(armory, "down", false));
+		kitchen.setExit("east", new Door(throneHall, "east", true));
+		throneHall.setExit("west", new Door(kitchen, "west", false));
+		throneHall.setExit("down", new Door(catacombs, "down", false));
+		catacombs.setExit("north", new Door(throneHall, "north", false));
+		armory.setExit("down", new Door(catacombs, "down", false));
+		sorceryChamber.setExit("north", new Door(prisonChambers, "north", false));
+		prisonChambers.setExit("south", new Door(sorceryChamber, "south", false));
+		prisonChambers.setExit("east", new Door(catacombs, "east", false));
+		catacombs.setExit("east", new Door(prisonChambers, "east", false));
+		catacombs.setExit("west", new Door(armory, "west", false));
+		start.setExit("forward", new Door(entrance, "forward", false));
+		sorceryChamber.setExit("east", new Door(exit, "east", false));
 	}
 
 	public Room getStartingRoom() {

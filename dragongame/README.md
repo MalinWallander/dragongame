@@ -14,11 +14,11 @@
     | Rum             | Tillgängliga riktningar                                               |
     | --------------- | --------------------------------------------------------------------- |
     | Start           | forward → Entrance                                                    |
-    | Entrance        | east → Great Hall, south → Library, up → Watch Tower                  |
+    | Entrance        | east → Great Hall, south → Library, up (locked) → Watch Tower                  |
     | Great Hall      | west → Entrance, north → Kitchen, south → Armory, east → Throne Hall  |
     | Library         | north → Entrance, east → Armory                                       |
     | Armory          | north → Great Hall, west → Library, up → High Tower, down → Catacombs |
-    | Kitchen         | south → Great Hall, east → Throne Hall                                |
+    | Kitchen         | south → Great Hall, east (locked) → Throne Hall                                |
     | Throne Hall     | west → Kitchen, down → Catacombs                                      |
     | Watch Tower     | down → Entrance                                                       |
     | High Tower      | down → Armory                                                         |
@@ -44,7 +44,7 @@
     	--GameEngine: startar spelet, tolkar kommandon och flyttar spelaren
     	--GameWorld: skapar rum, dörrar och startpunkt
     	--Room: lagrar namn, beskrivning och dörrar; skriver ut rumsinfo
-    	--Door: representerar dörrar vilket rum de leder till
+    	--Door: representerar dörrar vilket rum de leder till och om den är låst
     	--Player: håller koll på nuvarande rum och flyttar spelaren
     	--MainGame: kör playGame();
 
@@ -55,8 +55,8 @@
     	3- Varje rum visar beskrivning och möjliga riktningar
     	4- Spelaen skriver kommando som visar vart de vill gå.
     	5- Kommandon: north/n, south/s, east/e, west/w, up/u, down/d, forward/f
-    	6- Om dörr finns → flytta spelaren
-    	7- Om ingen dörr → felmeddelande
+    	6- Om dörr finns och är inte är låst → flytta spelaren
+    	7- Om ingen dörr eller dörr är låst → felmeddelande
     	8- När Exit nås avslutas spelet
     	9- Skriv stop när som helst för att avsluta
 
