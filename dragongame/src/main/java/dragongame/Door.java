@@ -6,6 +6,7 @@ public class Door {
 	private String direction;
 	private boolean isLocked = false;
 
+	// Konstruktor som skapar en dörr med målrum, riktning och låsstatus
 	public Door(Room leadsTo, String direction, boolean isLocked) {
 		this.leadsTo = leadsTo;
 		this.direction = direction;

@@ -8,12 +8,15 @@ public class Room {
 	private String description;
 	private Map<String, Door> exits = new HashMap<>();
 
+	 // Konstruktor som skapar ett rum med namn och beskrivning
 	public Room(String name, String description) {
 		this.name = name;
 		this.description = description;
 		this.exits = new HashMap<>();
 	}
 
+
+    // Lägger till en utgång i en viss riktning med en specifik dörr
 	public void setExit(String direction, Door door) {
 		exits.put(direction, door);
 	}
@@ -22,6 +25,7 @@ public class Room {
 		return exits.get(direction);
 	}
 
+	// Returnerar nästa rum som dörren leder till om en dörr finns i riktningen
 	public Room getNextRoom(String direction) {
 		Door door = exits.get(direction);
 		if (door != null) {

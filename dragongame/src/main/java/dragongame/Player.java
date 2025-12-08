@@ -4,6 +4,8 @@ public class Player {
 	private Room currentRoom;
 	private String name;
 
+
+	// Konstruktor som skapar en spelare med ett startrum och ett namn
 	public Player(Room startingRoom, String name) {
 		this.currentRoom = startingRoom;
 		this.name = name;
@@ -17,6 +19,7 @@ public class Player {
 		return name;
 	}
 
+	// Försöker flytta spelaren i en given riktning
 	public void move(String direction) {
 		Room next = currentRoom.getNextRoom(direction);
 
