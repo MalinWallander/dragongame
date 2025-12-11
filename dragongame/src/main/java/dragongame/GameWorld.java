@@ -13,7 +13,8 @@ public class GameWorld {
 
 		rooms.addAll(Arrays.asList(roomArray));
 	}
-      // Skapar alla rum med namn och berättande beskrivningar
+
+	// Skapar alla rum med namn och berättande beskrivningar
 	public void setUpField() {
 		Room entrance = new Room("Entrance",
 				"You are standing in the castle's main entry hall. Cold wind sweeps through the cracked stone doorway, and flickering torches cast long shadows. You have a door to the east (e), a passageway to the south (s), and a locked winding staircase leading up (u). Type where you want to go.");
@@ -42,15 +43,14 @@ public class GameWorld {
 		start = new Room("Start",
 				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
-
 		// Lägg in rummen i listan så de kan sparas om spelet behöver administrera dem
 		registerRooms(entrance, greatHall, library, armory, kitchen, throneHall,
 				watchTower, highTower, prisonChambers, sorceryChamber, catacombs, exit, start);
 
+		// Kopplar ihop rummen med dörrar (riktning, destination och låsstatus)
+		// Format: fromRoom.setExit("direction", new Door(targetRoom, "direction",
+		// isLocked));
 
-				 // Kopplar ihop rummen med dörrar (riktning, destination och låsstatus)
-        // Format: fromRoom.setExit("direction", new Door(targetRoom, "direction", isLocked));
-		
 		entrance.setExit("east", new Door(greatHall, "east", false));
 		greatHall.setExit("west", new Door(entrance, "west", false));
 		entrance.setExit("south", new Door(library, "south", false));
