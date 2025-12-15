@@ -1,7 +1,8 @@
 package dragongame;
 
-public class potion extends Item {
-}
-    public potion(String name, String description) {
+public class Potion extends Item{
+ public Potion(String name, String description) {
         super(name, description);
     }
+    
+}
