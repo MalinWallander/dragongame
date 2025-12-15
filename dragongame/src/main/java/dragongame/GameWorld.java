@@ -80,7 +80,7 @@ public class GameWorld {
 		sorceryChamber.setExit("east", new Door(exit, "east", false));
 
 		// Lägg till items till rum
-		entrance.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
+		watchTower.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
 	}
 
 	public Room getStartingRoom() {
