@@ -1,12 +1,15 @@
 package dragongame;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Room {
 	private String name;
 	private String description;
 	private Map<String, Door> exits = new HashMap<>();
+	private List<Item> items = new ArrayList<>();
 
 	// Konstruktor som skapar ett rum med namn och beskrivning
 	public Room(String name, String description) {
@@ -43,6 +46,14 @@ public class Room {
 
 	public void roomNarrative() {
 		System.out.println(description);
+	}
+
+	public void addItem(Item item) {
+		items.add(item);
+	}
+
+	public List<Item> getItems() {
+		return items;
 	}
 
 }

@@ -1,9 +1,12 @@
 package dragongame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 	private Room currentRoom;
 	private String name;
-
+	private List<Item> inventory = new ArrayList<>();
 
 	// Konstruktor som skapar en spelare med ett startrum och ett namn
 	public Player(Room startingRoom, String name) {

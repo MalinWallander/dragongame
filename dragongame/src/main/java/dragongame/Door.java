@@ -24,4 +24,8 @@ public class Door {
 	public boolean isLocked() {
 		return isLocked;
 	}
+
+	public void unlock() {
+		isLocked = false;
+	}
 }

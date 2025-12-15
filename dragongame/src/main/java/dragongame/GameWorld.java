@@ -78,6 +78,9 @@ public class GameWorld {
 		catacombs.setExit("west", new Door(armory, "west", false));
 		start.setExit("forward", new Door(entrance, "forward", false));
 		sorceryChamber.setExit("east", new Door(exit, "east", false));
+
+		// Lägg till items till rum
+		entrance.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
 	}
 
 	public Room getStartingRoom() {

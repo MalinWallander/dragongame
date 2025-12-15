@@ -9,7 +9,7 @@
 
     Spelet utspelar sig i en fantasy-miljö där spelaren stiger in i ruinen av det gamla drakslottet Eldrastens Ruin. Rummen är designade för att ge stämning, tydlig navigering och möjlighet till framtida utbyggnad (strider, föremål, NPC:er).
 
-    Spelet innehåller följande rum:
+    Spelet innehåller följande rum (se planritning under resources):
 
     | Rum             | Tillgängliga riktningar                                               |
     | --------------- | --------------------------------------------------------------------- |
