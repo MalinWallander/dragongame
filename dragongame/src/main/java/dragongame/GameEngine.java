@@ -75,7 +75,7 @@ public class GameEngine {
             for (int i = 0; i < room.getItems().size(); i++) {
                 System.out.println(i + ": " + room.getItems().get(i).getName());
             }
-            System.out.println("Type the number to pick up an item, or press enter to skip:");
+            System.out.println("Type the number to pick up an item, then type which direction you want to go:");
            String input = scanner.nextLine().trim();
 
             if (!input.isEmpty()) {

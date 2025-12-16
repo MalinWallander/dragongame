@@ -65,7 +65,7 @@ public void showInventory() {
         // Dörren är öppen
         currentRoom = next;
         System.out.println("You are walking " + direction + " to " + currentRoom.getName() + ".");
-        currentRoom.roomNarrative();
+         currentRoom.roomNarrative();
     } else {
         // Dörren är låst → fråga spelaren efter item
         System.out.println("This door is locked. Choose an item from your inventory to unlock it:");
