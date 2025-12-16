@@ -1,18 +1,10 @@
 package dragongame;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class GameWorld {
 
-	private List<Room> rooms = new ArrayList<>();
+	
 	private Room start;
-
-	private void registerRooms(Room... roomArray) {
-
-		rooms.addAll(Arrays.asList(roomArray));
-	}
 
 	// Skapar alla rum med namn och berättande beskrivningar
 	public void setUpField() {
@@ -43,9 +35,7 @@ public class GameWorld {
 		start = new Room("Start",
 				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
-		// Lägg in rummen i listan så de kan sparas om spelet behöver administrera dem
-		registerRooms(entrance, greatHall, library, armory, kitchen, throneHall,
-				watchTower, highTower, prisonChambers, sorceryChamber, catacombs, exit, start);
+		
 
 		// Kopplar ihop rummen med dörrar (riktning, destination och låsstatus)
 		// Format: fromRoom.setExit("direction", new Door(targetRoom, "direction",
@@ -81,7 +71,9 @@ public class GameWorld {
 
 		// Lägg till items till rum
 		watchTower.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
+		entrance.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
 	}
+	
 
 	public Room getStartingRoom() {
 		return start;

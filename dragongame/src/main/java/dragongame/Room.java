@@ -10,6 +10,8 @@ public class Room {
 	private String description;
 	private Map<String, Door> exits = new HashMap<>();
 	private List<Item> items = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
+	
 
 	// Konstruktor som skapar ett rum med namn och beskrivning
 	public Room(String name, String description) {
@@ -36,6 +38,16 @@ public class Room {
 			return null;
 	}
 
+
+	public Door getLockedDoor() {
+    for (Door door : exits.values()) {
+        if (door.isLocked()) {
+            return door;
+        }
+    }
+    return null;
+}
+
 	public String getName() {
 		return name;
 	}
@@ -46,6 +58,7 @@ public class Room {
 
 	public void roomNarrative() {
 		System.out.println(description);
+
 	}
 
 	public void addItem(Item item) {
@@ -56,4 +69,12 @@ public class Room {
 		return items;
 	}
 
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
+	}
+
+
+public List<Enemy> getEnemy() {
+		return enemies;
+}
 }
