@@ -4,12 +4,15 @@ public class Enemy {
 	private String name;
 	private int health;
 	private int attackPower;
+	private String description;
 
-	public Enemy(String name, int health, int attackPower) {
-		this.name = name;
-		this.health = health;
-		this.attackPower = attackPower;
-	}
+
+	public Enemy(String name, int health, int attackPower, String description) {
+    this.name = name;
+    this.health = health;
+    this.attackPower = attackPower;
+    this.description = description;
+}
 
 	public String getName() {
 		return name;
@@ -29,6 +32,10 @@ public class Enemy {
 			health = 0;
 		}
 	}
+
+	 public String getDescription() {
+        return description;
+    }
 
 	public boolean isAlive() {
 		return health > 0;

@@ -71,12 +71,20 @@ public class GameWorld {
 
 		// Lägg till items till rum
 		watchTower.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
+		watchTower.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
+
 		entrance.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
+		kitchen.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
+		armory.addItem(new Sword("Silver Sword", "A shiny silver sword. It looks effective against enemies."));
+		greatHall.addItem(new Key("Golden Key", "A shiny golden key. It might open a very important door."));
+	    throneHall.addEnemy(new Goblin( "Goblin", 10, 1, "A small but nasty goblin. It looks hostile."));
+		prisonChambers.addItem(new Potion ("Health potion", "A health potion. It will give you back your 10 health points."));
+		sorceryChamber.addEnemy(new Dragon("Dragon", 10, 5, "A huge and terrifying dragon. It looks extremely hostile."));
 	}
-	
 
 	public Room getStartingRoom() {
 		return start;
 	}
 
 }
+
