@@ -31,7 +31,7 @@ public class Player {
 // Lägger till ett item i spelarens inventory
 public void addItem(Item item) {
     inventory.add(item);
-    System.out.println(item.getName() + " has been added to your inventory.");
+    System.out.println(item.getName() + " has been added to your inventory. Which direction do you want to go?");
 }
 
 // Tar bort ett item från spelarens inventory
