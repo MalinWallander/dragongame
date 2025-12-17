@@ -1,9 +1,7 @@
 package dragongame;
 
-
 public class GameWorld {
 
-	
 	private Room start;
 
 	// Skapar alla rum med namn och berättande beskrivningar
@@ -33,9 +31,7 @@ public class GameWorld {
 		Room exit = new Room("Exit",
 				"You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Well played, adventurer! Press enter to conclude your adventure.");
 		start = new Room("Start",
-				"Welcome to the dragon adventure game! You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
-
-		
+				"You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
 		// Kopplar ihop rummen med dörrar (riktning, destination och låsstatus)
 		// Format: fromRoom.setExit("direction", new Door(targetRoom, "direction",
@@ -77,8 +73,9 @@ public class GameWorld {
 		kitchen.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
 		armory.addItem(new Sword("Silver Sword", "A shiny silver sword. It looks effective against enemies."));
 		greatHall.addItem(new Key("Golden Key", "A shiny golden key. It might open a very important door."));
-	    throneHall.addEnemy(new Goblin( "Goblin", 10, 1, "A small but nasty goblin. It looks hostile."));
-		prisonChambers.addItem(new Potion ("Health potion", "A health potion. It will give you back your 10 health points."));
+		throneHall.addEnemy(new Goblin("Goblin", 10, 1, "A small but nasty goblin. It looks hostile."));
+		prisonChambers
+				.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
 		sorceryChamber.addEnemy(new Dragon("Dragon", 10, 5, "A huge and terrifying dragon. It looks extremely hostile."));
 	}
 
@@ -87,4 +84,3 @@ public class GameWorld {
 	}
 
 }
-

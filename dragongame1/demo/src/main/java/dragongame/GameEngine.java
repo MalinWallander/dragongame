@@ -4,16 +4,17 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GameEngine {
-
+    // Spelare
     private Player player;
 
+    // Konstruktor som skapar spelmotorn och initierar spelvärlden och spelaren
     public GameEngine() {
         GameWorld world = new GameWorld();
         world.setUpField();
-        this.player = new Player(world.getStartingRoom(), "Adventurer");
+        this.player = new Player(world.getStartingRoom(), "Hero");
     }
 
-    // Karta för att tolka riktningar och deras förkortningar
+    // Alias → fullständiga riktningar
     private static final Map<String, String> directionAliases = Map.ofEntries(
             Map.entry("n", "north"),
             Map.entry("s", "south"),
@@ -24,25 +25,31 @@ public class GameEngine {
             Map.entry("f", "forward"),
             Map.entry("enter", "forward"));
 
+    // Översätter spelarkommandon → fullständig riktning
     private String parseDirection(String input) {
+
+        // Om spelaren skriver exakt riktningen ("east")
         for (String fullDir : directionAliases.values()) {
             if (input.equals(fullDir)) {
                 return fullDir;
             }
         }
+
+        // Om spelaren skriver kort ("e", "ea", "eas")
         for (Map.Entry<String, String> entry : directionAliases.entrySet()) {
             if (input.startsWith(entry.getKey())) {
                 return entry.getValue();
             }
         }
-        return null;
+
+        return null; // Ogiltigt kommando
     }
 
-    // Huvudspel-loopen
+    // Huvudspel-loop
     public void playGame() {
+        // Skapa scanner för inmatning
         Scanner scanner = new Scanner(System.in);
-        boolean playing = true;
-
+        // Fråga spelarens namn
         System.out.println("What is your name, adventurer? ");
         String name = scanner.nextLine().trim();
         // Sätt spelarens namn
@@ -52,54 +59,38 @@ public class GameEngine {
         player.setName(name);
         // Välkomstmeddelande
         System.out.println("Welcome to the dragongame adventure, " + name + "!");
+        // Spelvariabler
+        String command;
+        boolean playing = true;
 
+        // Introduktion
         player.getCurrentRoom().roomNarrative();
-        checkRoomForItems(scanner);
-
+        // Spelloop
         while (playing) {
+            // Vänta på spelarens kommando
             System.out.print("> ");
-            String command = scanner.nextLine().trim().toLowerCase();
-
+            // Läs in och bearbeta kommandot
+            command = scanner.nextLine().trim().toLowerCase();
+            // Kontrollera om spelaren har nått slutrummet
+            if (player.getCurrentRoom().getName().equals("Exit")) {
+                playing = false;
+                continue;
+            }
+            // Hantera kommandon
             if (command.equals("stop")) {
                 System.out.println("Thank you for playing!");
-                break;
-            }
-
-            String direction = parseDirection(command);
-            if (direction != null) {
-                player.move(direction, scanner);
-                checkRoomForItems(scanner);
+                playing = false;
             } else {
-                System.out.println("I don't understand that command.");
-            }
-        }
-
-        scanner.close();
-    }
-
-    // Check the current room for items and allow the player to pick them up
-    private void checkRoomForItems(Scanner scanner) {
-        Room room = player.getCurrentRoom();
-        if (!room.getItems().isEmpty()) {
-            System.out.println("You see the following items:");
-            for (int i = 0; i < room.getItems().size(); i++) {
-                System.out.println(i + ": " + room.getItems().get(i).getName());
-            }
-            System.out.println("Type the number to pick up an item:");
-            String input = scanner.nextLine().trim();
-
-            if (!input.isEmpty()) {
-                try {
-                    int choice = Integer.parseInt(input);
-                    if (choice >= 0 && choice < room.getItems().size()) {
-                        Item picked = room.getItems().remove(choice);
-                        player.addItem(picked);
-                    } else
-                        System.out.println("Invalid choice.");
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input.");
+                String direction = parseDirection(command);
+                if (direction != null) {
+                    player.move(direction);
+                } else {
+                    System.out.println("I don't understand that command.");
                 }
             }
         }
+        // Stäng scanner
+        scanner.close();
     }
+
 }
