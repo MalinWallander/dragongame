@@ -40,6 +40,7 @@ public void removeItem(Item item) {
 }
 
 // Visar spelarens inventory
+
 public void showInventory() {
     if (inventory.isEmpty()) {
         System.out.println("Your inventory is empty.");

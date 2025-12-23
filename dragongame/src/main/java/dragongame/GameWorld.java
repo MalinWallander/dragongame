@@ -72,7 +72,6 @@ public class GameWorld {
 		// Lägg till items till rum
 		watchTower.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
 		watchTower.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
-
 		entrance.addItem(new Key("Rusty Key", "An old rusty key. It might open a locked door."));
 		kitchen.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
 		armory.addItem(new Sword("Silver Sword", "A shiny silver sword. It looks effective against enemies."));
