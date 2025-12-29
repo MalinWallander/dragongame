@@ -73,8 +73,7 @@ public class GameWorld {
 		armory.addItem(new Sword("Silver Sword", "A shiny silver sword. It looks effective against enemies."));
 		greatHall.addItem(new Key("Golden Key", "A shiny golden key. It might open a very important door."));
 		throneHall.addEnemy(new Goblin("Goblin", 10, 1, "A small but nasty goblin. It looks hostile."));
-		prisonChambers
-				.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
+		prisonChambers.addItem(new Potion("Health potion", "A health potion. It will give you back your 10 health points."));
 		sorceryChamber.addEnemy(new Dragon("Dragon", 10, 5, "A huge and terrifying dragon. It looks extremely hostile."));
 	}
 

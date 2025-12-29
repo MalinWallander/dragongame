@@ -31,7 +31,9 @@ public abstract class Enemy {
 		if (health < 0) {
 			health = 0;
 		}
-	}
+}
+	public abstract void attack(Player player);
+	 
 
 	 public String getDescription() {
         return description;

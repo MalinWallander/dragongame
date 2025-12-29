@@ -9,11 +9,14 @@ public class Player {
 	private String name;
 	private List<Item> inventory = new ArrayList<>();
 
-	// Konstruktor som skapar en spelare med ett startrum och ett namn
-	public Player(Room startingRoom, String name) {
-		this.currentRoom = startingRoom;
-		this.name = name;
-	}
+	private Integer health;
+
+    // Konstruktor som skapar en spelare med ett startrum och ett namn
+    public Player(Room startingRoom, String name, Integer health) {
+        this.currentRoom = startingRoom;
+        this.name = name;
+        this.health = health;
+    }
 
 	public Room getCurrentRoom() {
 		return currentRoom;
@@ -27,6 +30,10 @@ public class Player {
 		return name;
 	}
 
+    public Integer getHealth() {
+    return health;
+}
+
 
 // Lägger till ett item i spelarens inventory
 public void addItem(Item item) {
@@ -38,6 +45,7 @@ public void addItem(Item item) {
 public void removeItem(Item item) {
     inventory.remove(item);
 }
+
 
 // Visar spelarens inventory
 
@@ -106,5 +114,19 @@ public void setName(String name) {
     this.name = name;
 }
 
+public void heal(int amount) {
+    this.health += amount;
+    System.out.println("You have been healed by " + amount + " points. Current health : " + this.health); 
+
   }
+public void takeDamage(int damage) {
+    this.health -= damage;
+    if (this.health < 0) {
+        this.health = 0;
+    }
+    System.out.println("You took " + damage + " damage. Current health: " + this.health);
+
+  }
+  
+  } 
 
