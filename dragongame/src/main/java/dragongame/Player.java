@@ -102,4 +102,9 @@ public void showInventory() {
         Item item = inventory.get(choice);
         item.use(this);
     }
+public void setName(String name) {
+    this.name = name;
 }
+
+  }
+
