@@ -10,7 +10,7 @@ public class GameEngine {
     public GameEngine() {
         GameWorld world = new GameWorld();
         world.setUpField();
-        this.player = new Player(world.getStartingRoom(), "Adventurer");
+        this.player = new Player(world.getStartingRoom(), "Adventurer" , 10);
     }
 
     // Karta för att tolka riktningar och deras förkortningar
