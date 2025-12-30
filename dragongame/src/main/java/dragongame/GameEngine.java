@@ -10,7 +10,7 @@ public class GameEngine {
     public GameEngine() {
         GameWorld world = new GameWorld();
         world.setUpField();
-        this.player = new Player(world.getStartingRoom(), "Adventurer" , 10);
+        this.player = new Player(world.getStartingRoom(), "Adventurer", 10);
     }
 
     // Karta för att tolka riktningar och deras förkortningar
@@ -55,6 +55,7 @@ public class GameEngine {
 
         player.getCurrentRoom().roomNarrative();
         checkRoomForItems(scanner);
+        checkRoomForEnemies(scanner);
 
         while (playing) {
             System.out.print("> ");
@@ -69,6 +70,7 @@ public class GameEngine {
             if (direction != null) {
                 player.move(direction, scanner);
                 checkRoomForItems(scanner);
+                checkRoomForEnemies(scanner);
             } else {
                 System.out.println("I don't understand that command.");
             }
@@ -81,21 +83,53 @@ public class GameEngine {
     private void checkRoomForItems(Scanner scanner) {
         Room room = player.getCurrentRoom();
         if (!room.getItems().isEmpty()) {
-            System.out.println("You see the following items:");
             for (int i = 0; i < room.getItems().size(); i++) {
-                System.out.println(i + ": " + room.getItems().get(i).getName());
+                System.out.println("You see " + room.getItems().get(i).getDescription() + " Type p to pick it up.");
             }
-            System.out.println("Type the number to pick up an item:");
+            System.out.print("> ");
             String input = scanner.nextLine().trim();
 
             if (!input.isEmpty()) {
                 try {
-                    int choice = Integer.parseInt(input);
-                    if (choice >= 0 && choice < room.getItems().size()) {
-                        Item picked = room.getItems().remove(choice);
+                    if (input.equals("p")) {
+                        Item picked = room.getItems().remove(0);
                         player.addItem(picked);
                     } else
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid input.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input.");
+                }
+            }
+        }
+    }
+
+    private void checkRoomForEnemies(Scanner scanner) {
+        Room room = player.getCurrentRoom();
+        if (!room.getEnemy().isEmpty()) {
+            for (int i = 0; i < room.getEnemy().size(); i++) {
+                System.out.println("You encouunter " + room.getEnemy().get(i).getDescription() + " Prepare for battle! Press a to attack.");
+            }
+            System.out.print("> ");
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                try {
+                    if (input.equals("a")) {
+                        Enemy enemy = room.getEnemy().get(0);
+                        while (enemy.getHealth() > 0 && player.getHealth() > 0) {
+                            player.attack(enemy);
+                            if (enemy.getHealth() > 0) {
+                                enemy.attack(player);
+                            }
+                        }
+                        if (player.getHealth() > 0) {
+                            System.out.println("You have defeated the " + enemy.getName() + "!");
+                            room.removeEnemy(enemy);
+                        } else {
+                            System.out.println("You have been defeated by the " + enemy.getName() + ". Game over.");
+                            System.exit(0);
+                        }
+                    } else
+                        System.out.println("Invalid input.");
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input.");
                 }

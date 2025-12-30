@@ -16,8 +16,8 @@ public abstract class Item {
 	public String getDescription() {
 		return description;
 
-		
 	}
 
-		 public void use(Player player){};
+	public void use(Player player) {
+	}
 }

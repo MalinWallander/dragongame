@@ -73,8 +73,11 @@ public class Room {
 		enemies.add(enemy);
 	}
 
+	public void removeEnemy(Enemy enemy) {
+		enemies.remove(enemy);
+	}
 
-public List<Enemy> getEnemy() {
+	public List<Enemy> getEnemy() {
 		return enemies;
-}
+	}
 }
