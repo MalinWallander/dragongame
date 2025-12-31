@@ -44,6 +44,7 @@ public class GameEngine {
         boolean playing = true;
 
         System.out.println("What is your name, adventurer? ");
+        System.out.print("> ");
         String name = scanner.nextLine().trim();
         // Sätt spelarens namn
         if (name.isEmpty()) {
@@ -107,7 +108,8 @@ public class GameEngine {
         Room room = player.getCurrentRoom();
         if (!room.getEnemy().isEmpty()) {
             for (int i = 0; i < room.getEnemy().size(); i++) {
-                System.out.println("You encouunter " + room.getEnemy().get(i).getDescription() + " Prepare for battle! Press a to attack.");
+                System.out.println("You encouunter " + room.getEnemy().get(i).getDescription()
+                        + " Prepare for battle! Press a to attack.");
             }
             System.out.print("> ");
             String input = scanner.nextLine().trim();
@@ -124,12 +126,24 @@ public class GameEngine {
                         if (player.getHealth() > 0) {
                             System.out.println("You have defeated the " + enemy.getName() + "!");
                             room.removeEnemy(enemy);
+                            System.out.println("Your current health: " + player.getHealth()
+                                    + " Maybe you want to heal yourself? Type h to use a health potion.");
+                            System.out.print("> ");
+                            String healInput = scanner.nextLine().trim();
+                            if (healInput.equals("h") && player.hasItem("Health potion")) {
+                                player.heal(10);
+                            } else if (healInput.equals("h")) {
+                                System.out.println("You don't have a health potion to use. Go explore and find one!");
+                            } else {
+                                System.out.println("You chose not to heal. Where do you want to go next?");
+                            }
                         } else {
                             System.out.println("You have been defeated by the " + enemy.getName() + ". Game over.");
                             System.exit(0);
                         }
-                    } else
+                    } else {
                         System.out.println("Invalid input.");
+                    }
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input.");
                 }

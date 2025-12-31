@@ -44,8 +44,16 @@ public class Player {
         inventory.remove(item);
     }
 
-    // Visar spelarens inventory
+    public boolean hasItem(String itemName) {
+        for (Item item : inventory) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    // Visar spelarens inventory
     public void showInventory() {
         if (inventory.isEmpty()) {
             System.out.println("Your inventory is empty.");
@@ -74,36 +82,29 @@ public class Player {
             currentRoom.roomNarrative();
         } else {
             // Dörren är låst → fråga spelaren efter item
-            System.out.println("This door is locked. Choose an item from your inventory to unlock it:");
-            chooseItemToUnlock(door, scanner);
+            System.out.println("This door is locked. Let's see if your inventory has a key to unlock it.");
+            showInventory();
+
+            if (!hasItem("Key")) {
+                System.out
+                        .println(
+                                "You don't have any key in your inventory. Explore the rooms to find a key. Where do you want to go?");
+                return;
+            } else if (hasItem("Key")) {
+                System.out.println(
+                        "You have a key in your inventory. Press o to use a key to unlock the door, or any other key to not use it.");
+                System.out.print("> ");
+                String input = scanner.nextLine().trim();
+                if (!input.isEmpty() && input.equals("o")) {
+                    System.out.println("You chose to use a key to unlock the door.");
+                    door.unlock();
+                    move(direction, scanner);
+                } else {
+                    System.out.println("You chose not to use a key. Where do you want to go next?");
+                    return;
+                }
+            }
         }
-    }
-
-    // metod för att välja item från inventory för att låsa upp dörr
-
-    private void chooseItemToUnlock(Door door, Scanner scanner) {
-
-        if (inventory.isEmpty()) {
-            System.out.println("Your inventory is empty.");
-            return;
-        }
-
-        System.out.println("Choose an item to use:");
-        for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(i + 1 + ": " + inventory.get(i).getName());
-        }
-
-        System.out.print("> ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        if (choice < 1 || choice >= inventory.size() + 1) {
-            System.out.println("Invalid choice.");
-            return;
-        }
-
-        Item item = inventory.get(choice - 1);
-        item.use(this);
     }
 
     public void setName(String name) {
