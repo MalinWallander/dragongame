@@ -66,9 +66,9 @@ public class GameWorld {
 		sorceryChamber.setExit("east", new Door(exit, "east", false));
 
 		// Lägg till items till rum
-		watchTower.addItem(new Potion("Health potion", "a health potion. It will give you back your 10 health points."));
+		watchTower.addItem(new Potion("Health potion", "a health potion. That would be good to have in a fight."));
 		entrance.addItem(new Key("Key", "an old rusty key. It might open a locked door."));
-		kitchen.addItem(new Potion("Health potion", "a health potion. It will give you back your 10 health points."));
+		kitchen.addItem(new Potion("Health potion", "a health potion. That would be good to have in a fight."));
 		armory.addItem(new Sword("Silver Sword", "a shiny silver sword. It looks effective against enemies."));
 		greatHall.addItem(new Key("Key", "a shiny golden key. It might open a very important door."));
 		throneHall.addEnemy(new Goblin("Goblin", 10, 1, "a small but nasty goblin. It looks hostile."));

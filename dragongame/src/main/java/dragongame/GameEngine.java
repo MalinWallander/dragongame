@@ -108,7 +108,7 @@ public class GameEngine {
         Room room = player.getCurrentRoom();
         if (!room.getEnemy().isEmpty()) {
             for (int i = 0; i < room.getEnemy().size(); i++) {
-                System.out.println("You encouunter " + room.getEnemy().get(i).getDescription()
+                System.out.println("You encounter " + room.getEnemy().get(i).getDescription()
                         + " Prepare for battle! Press a to attack.");
             }
             System.out.print("> ");
@@ -124,7 +124,6 @@ public class GameEngine {
                             }
                         }
                         if (player.getHealth() > 0) {
-                            System.out.println("You have defeated the " + enemy.getName() + "!");
                             room.removeEnemy(enemy);
                             System.out.println("Your current health: " + player.getHealth()
                                     + " Maybe you want to heal yourself? Type h to use a health potion.");

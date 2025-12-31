@@ -113,7 +113,7 @@ public class Player {
 
     public void heal(int amount) {
         this.health += amount;
-        System.out.println("You have been healed by " + amount + " points. Current health : " + this.health);
+        System.out.println("You have been healed by " + amount + " points. Current health: " + this.health);
     }
 
     public void takeDamage(int damage) {
@@ -128,7 +128,6 @@ public class Player {
         System.out.println("You attack the " + enemy.getName() + "!");
         enemy.takeDamage(2); // Fixed damage for simplicity
         if (enemy.getHealth() <= 0) {
-            System.out.println("You have defeated the " + enemy.getName() + "!");
             currentRoom.removeEnemy(enemy);
         } else {
             System.out.println("The " + enemy.getName() + " has " + enemy.getHealth() + " health left.");
