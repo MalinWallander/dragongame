@@ -85,21 +85,20 @@ public class GameEngine {
         Room room = player.getCurrentRoom();
         if (!room.getItems().isEmpty()) {
             for (int i = 0; i < room.getItems().size(); i++) {
-                System.out.println("You see " + room.getItems().get(i).getDescription() + " Type p to pick it up.");
+                System.out.println("You see " + room.getItems().get(i).getDescription()
+                        + " Type p to pick it up. Or press enter to ignore it.");
             }
             System.out.print("> ");
             String input = scanner.nextLine().trim();
 
             if (!input.isEmpty()) {
-                try {
-                    if (input.equals("p")) {
-                        Item picked = room.getItems().remove(0);
-                        player.addItem(picked);
-                    } else
-                        System.out.println("Invalid input.");
-                } catch (NumberFormatException e) {
+                if (input.equals("p") || input.equals("P")) {
+                    Item picked = room.getItems().remove(0);
+                    player.addItem(picked);
+                } else
                     System.out.println("Invalid input.");
-                }
+            } else {
+                System.out.println("You chose not to pick up the item. Where do you want to go next?");
             }
         }
     }

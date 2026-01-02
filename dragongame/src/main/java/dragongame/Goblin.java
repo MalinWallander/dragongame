@@ -4,10 +4,12 @@ public class Goblin extends Enemy {
 
     public Goblin(String name, int health, int attackPower, String description) {
         super(name, health, attackPower, description);
-    } 
+    }
 
-    @Override public void attack(Player player) {
-      System.out.println(getName() + " breathes fire at you, dealing " + getAttackPower() + " damage!");   player.takeDamage(getAttackPower());
+    @Override
+    public void attack(Player player) {
+        System.out.println(getName() + " hacks you with a dagger, dealing " + getAttackPower() + " damage!");
+        player.takeDamage(getAttackPower());
     }
 
     @Override
