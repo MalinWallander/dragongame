@@ -28,8 +28,7 @@ public class GameWorld {
 				"Arcane symbols are etched into the stone floor, glowing faintly. Shelves filled with mystical artifacts and ancient scrolls surround you. A door to the north (n) leads to the prison chambers and a door to the east (e) leads to the exit.");
 		Room catacombs = new Room("Catacombs",
 				"Endless tunnels stretch into darkness, lined with skulls and bones. The air is cold, and every sound echoes eerily. You see a faint light in the distance. There is a staircase going north (n) to the throne hall, a door to the east (e) leading to the prison chambers, and a door to the west (w) leading to the armory.");
-		Room exit = new Room("Exit",
-				"You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Well played, adventurer! Press enter to conclude your adventure.");
+		Room exit = new Room("Exit", "");
 		start = new Room("Start",
 				"You are standing at the entrance of an old castle, mostly in ruins. Your mission is to find the exit on the other side. Press f or type 'forward' to start. If you for any reason want to stop playing, type 'stop'. Good luck!");
 
@@ -68,6 +67,7 @@ public class GameWorld {
 		// Lägg till items till rum
 		watchTower.addItem(new Potion("Health potion", "a health potion. That would be good to have in a fight."));
 		entrance.addItem(new Key("Key", "an old rusty key. It might open a locked door."));
+		library.addItem(new Potion("Health potion", "a health potion. That would be good to have in a fight."));
 		kitchen.addItem(new Potion("Health potion", "a health potion. That would be good to have in a fight."));
 		armory.addItem(new Sword("Silver Sword", "a shiny silver sword. It looks effective against enemies."));
 		greatHall.addItem(new Key("Key", "a shiny golden key. It might open a very important door."));

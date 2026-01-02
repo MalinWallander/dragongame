@@ -67,6 +67,14 @@ public class GameEngine {
                 break;
             }
 
+            if (player.getCurrentRoom().getName().equals("Exit")) {
+                System.out.println(
+                        "Congratulations, " + player.getName()
+                                + "! You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Press enter to conclude your adventure.");
+                scanner.nextLine();
+                System.exit(0);
+            }
+
             String direction = parseDirection(command);
             if (direction != null) {
                 player.move(direction, scanner);
@@ -116,16 +124,33 @@ public class GameEngine {
                 try {
                     if (input.equals("a")) {
                         Enemy enemy = room.getEnemy().get(0);
-                        while (enemy.getHealth() > 0 && player.getHealth() > 0) {
+                        while (enemy.getHealth() > 0 && player.getHealth() > 2) {
                             player.attack(enemy);
+
                             if (enemy.getHealth() > 0) {
                                 enemy.attack(player);
+                                if (player.getHealth() < 2 && player.hasItem("Potion")) {
+                                    System.out.println(
+                                            "You are too weak to continue fighting. You need to heal yourself first. Press h to heal.");
+                                    scanner.nextLine().trim();
+                                    if (input.equals("h")) {
+                                        player.heal(10);
+                                    } else if (!input.equals("h")) {
+                                        System.out.println(
+                                                "You chose not to heal. The enemy seizes the opportunity to strike!");
+                                        enemy.attack(player);
+                                    }
+                                } else if (player.getHealth() <= 1 && !player.hasItem("Potion")) {
+                                    System.out.println(
+                                            "You are too weak to continue fighting and have no potions to heal yourself. The enemy seizes the opportunity to strike!");
+                                    enemy.attack(player);
+                                }
                             }
                         }
                         if (player.getHealth() > 0) {
                             room.removeEnemy(enemy);
                             System.out.println("Your current health: " + player.getHealth()
-                                    + " Maybe you want to heal yourself? Type h to use a health potion.");
+                                    + " Maybe you want to heal yourself? Type h to use a health potion. Or press enter to continue.");
                             System.out.print("> ");
                             String healInput = scanner.nextLine().trim();
                             if (healInput.equals("h") && player.hasItem("Health potion")) {
