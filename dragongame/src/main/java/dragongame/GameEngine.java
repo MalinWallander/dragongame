@@ -67,15 +67,7 @@ public class GameEngine {
                 break;
             }
 
-            if (player.getCurrentRoom().getName().equals("Exit")) {
-                System.out.println(
-                        "Congratulations, " + player.getName()
-                                + "! You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Press enter to conclude your adventure.");
-                scanner.nextLine();
-                System.exit(0);
-            }
-
-            String direction = parseDirection(command);
+              String direction = parseDirection(command);
             if (direction != null) {
                 player.move(direction, scanner);
                 checkRoomForItems(scanner);
@@ -83,6 +75,15 @@ public class GameEngine {
             } else {
                 System.out.println("I don't understand that command.");
             }
+
+            if (player.getCurrentRoom().getName().equals("Exit")) {
+                System.out.println(
+                        "Congratulations, " + player.getName()
+                                + "! You have found the exit of the castle! Sunlight hits your face, and you can see the open world beyond. Freedom is just a step away. Press enter to conclude your adventure.");
+                scanner.nextLine();
+                playing = false;
+            }
+
         }
 
         scanner.close();
