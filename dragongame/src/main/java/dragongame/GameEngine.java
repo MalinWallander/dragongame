@@ -67,7 +67,7 @@ public class GameEngine {
                 break;
             }
 
-              String direction = parseDirection(command);
+            String direction = parseDirection(command);
             if (direction != null) {
                 player.move(direction, scanner);
                 checkRoomForItems(scanner);
@@ -125,26 +125,35 @@ public class GameEngine {
                 try {
                     if (input.equals("a")) {
                         Enemy enemy = room.getEnemy().get(0);
-                        while (enemy.getHealth() > 0 && player.getHealth() > 2) {
+
+                        while (enemy.getHealth() > 0 && player.getHealth() > 0) {
                             player.attack(enemy);
 
                             if (enemy.getHealth() > 0) {
                                 enemy.attack(player);
-                                if (player.getHealth() < 2 && player.hasItem("Potion")) {
-                                    System.out.println(
-                                            "You are too weak to continue fighting. You need to heal yourself first. Press h to heal.");
-                                    scanner.nextLine().trim();
-                                    if (input.equals("h")) {
-                                        player.heal(10);
-                                    } else if (!input.equals("h")) {
+
+                                // Offer healing when health drops to exactly 2 or below (but still alive)
+                                if (player.getHealth() > 0 && player.getHealth() <= 2) {
+                                    if (player.hasItem("Health potion")) {
+                                        System.out.println("WARNING: Your health is critically low! (Health: "
+                                                + player.getHealth() + ")");
                                         System.out.println(
-                                                "You chose not to heal. The enemy seizes the opportunity to strike!");
-                                        enemy.attack(player);
+                                                "Press h to use a health potion, or press enter to continue fighting.");
+                                        System.out.print("> ");
+                                        String healChoice = scanner.nextLine().trim();
+
+                                        if (healChoice.equals("h")) {
+                                            player.heal(10);
+                                            System.out.println(
+                                                    "You used a health potion! Current health: " + player.getHealth());
+                                        } else {
+                                            System.out.println("You bravely continue fighting at low health!");
+                                        }
+                                    } else {
+                                        System.out.println("You're critically wounded with no potions left! (Health: "
+                                                + player.getHealth() + ")");
+                                        System.out.println("You must fight on!");
                                     }
-                                } else if (player.getHealth() <= 1 && !player.hasItem("Potion")) {
-                                    System.out.println(
-                                            "You are too weak to continue fighting and have no potions to heal yourself. The enemy seizes the opportunity to strike!");
-                                    enemy.attack(player);
                                 }
                             }
                         }
