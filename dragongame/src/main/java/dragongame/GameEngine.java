@@ -108,6 +108,10 @@ public class GameEngine {
                         picked.use(player);
                         System.out.println(
                                 "You picked up the sword! Your attack power is now " + player.getAttackPower() + ".");
+                    } else if (picked instanceof Treasure) {
+                        ((Treasure) picked).printAsciiTreasure();
+                        System.out.println(
+                                "You have acquired the ancient treasure! Now, make your way to the exit to win the game!");
                     } else {
                         System.out.println(
                                 picked.getName() + " has been added to your inventory. Where do you want to go next?");
@@ -122,6 +126,11 @@ public class GameEngine {
 
     private void checkRoomForEnemies(Scanner scanner) {
         Room room = player.getCurrentRoom();
+        Enemy enemy = room.getEnemy().get(0);
+
+        if (enemy instanceof Dragon dragon) {
+            dragon.printAsciiDragon();
+        }
         if (!room.getEnemy().isEmpty()) {
             for (int i = 0; i < room.getEnemy().size(); i++) {
                 System.out.println("You encounter " + room.getEnemy().get(i).getDescription()
@@ -132,7 +141,6 @@ public class GameEngine {
             if (!input.isEmpty()) {
                 try {
                     if (input.equals("a")) {
-                        Enemy enemy = room.getEnemy().get(0);
 
                         while (enemy.getHealth() > 0 && player.getHealth() > 0) {
                             player.attack(enemy);
