@@ -52,9 +52,9 @@ Spelet innehåller följande rum:
 - Dörrar:
   Varje rum använder en `HashMap<String, Door>` för att lagra dörrar och riktningar.
 - Föremål:
-  Föremål lagras i `List<Item>` både i rum och i spelarens inventory.
+  Föremål lagras i `ArrayList<Item>` både i rum och i spelarens inventory.
 - Fiender:
-  Fiender lagras i `List<Enemy>` i respektive rum.
+  Fiender lagras i `ArrayList<Enemy>` i respektive rum.
 - Riktningar:  
   `Map<String, String> directionAliases` används för att tolka både korta och långa kommandon, t.ex. `n` och `north`.
 - Spelare:
@@ -100,14 +100,65 @@ Spelaren kan när som helst skriva stop för att avsluta spelet manuellt.
 
 ---
 
-# Antaganden / Designval
+# Motiverande av designval
+
+## Objektorienterad design
+
+Projektet är uppbyggt enligt objektorienterade principer där spelets centrala delar representeras av separata klasser med tydligt ansvar. Spelvärlden består av rum (Room) som är sammankopplade med dörrar (Door). Spelaren (Player) kan röra sig mellan rummen, interagera med föremål och bekämpa fiender. Alla instansvariabler är privata och nås via metoder, vilket följer god programmeringssed och inkapsling.
+
+## Arv och polymorfism
+
+För att uppfylla kraven på arv och polymorfism används abstrakta basklasser:
+
+- Enemy är en abstrakt basklass för alla fiender
+  -- Subklasser: Goblin, Dragon
+  -- Varje fiende implementerar sin egen attack(Player)-metod
+
+- Item är en abstrakt basklass för alla föremål
+  -- Subklasser: Key, Potion, Sword, Treasure
+  -- Varje item kan implementera egen funktionalitet via use(Player)
+
+Polymorfism används genom att:
+
+- Fiender lagras som Enemy men beter sig olika beroende på faktisk typ
+- Föremål lagras som Item i spelarens inventory men utför olika handlingar
+
+Detta gör det enkelt att lägga till nya fiender eller föremål utan att ändra befintlig kod.
+
+## Spelmekanik och interaktion
+
+- Spelaren har hälsa och attackstyrka
+- Utan vapen gör spelaren 1 skada
+- Ett svärd (Sword) ökar spelarens attackstyrka till 2
+- Fiender attackerar spelaren tills någon besegras
+- Hälsodryck (Potion) kan användas för att återställa hälsa
+- Nycklar (Key) används för att låsa upp låsta dörrar
+
+Strider sker turbaserat och använder samma metoder oavsett fiendetyp, vilket tydligt visar användningen av polymorfism.
+
+## Motivering datastrukturer
 
 - `directionAliases` används för bättre användarupplevelse
 - `HashMap` används för snabb åtkomst till dörrar
 - `ArrayList` används för inventory och fiender för flexibilitet
-- Spelet är textbaserat för att fokusera på OOP
-- Engelska används som spelspråk
-- Stridssystemet är enkelt och turbaserat
+
+## ASCII-grafik
+
+ASCII-grafik används för att förstärka spelupplevelsen:
+
+- Draken skriver ut ASCII-grafik när striden startar
+- Skatt visas när spelaren når slutet av spelet
+
+ASCII-utskrifterna är placerade nära den logik de hör till, vilket håller koden organiserad och lättläst.
+
+---
+
+# Antaganden
+
+- Spelaren kan bära obegränsat antal föremål
+- Endast ett vapen (svärd) påverkar attackstyrka
+- Alla strider måste genomföras för att kunna vinna spelet
+- Textbaserat gränssnitt används enligt uppgiftens exempel
 
 ---
 
