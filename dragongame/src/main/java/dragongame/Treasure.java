@@ -1,9 +1,11 @@
 package dragongame;
 
+// Treasure är ett föremål som representerar skatten i spelet
 public class Treasure extends Item {
+
+    // Konstruktor som skickar namn och beskrivning till Item
     public Treasure(String name, String description) {
         super(name, description);
-
     }
 
     public void printAsciiTreasure() {

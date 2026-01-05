@@ -48,11 +48,13 @@ public class GameEngine {
         System.out.println("What is your name, adventurer? ");
         System.out.print("> ");
         String name = scanner.nextLine().trim();
+
         // Sätt spelarens namn
         if (name.isEmpty()) {
             name = "Adventurer"; // fallback
         }
         player.setName(name);
+
         // Välkomstmeddelande
         System.out.println("Welcome to the dragongame adventure, " + name + "!");
 
@@ -60,6 +62,8 @@ public class GameEngine {
         checkRoomForItems(scanner);
         checkRoomForEnemies(scanner);
 
+
+        // Huvudloopen som körs så länge spelet är igång
         while (playing) {
             System.out.print("> ");
             String command = scanner.nextLine().trim().toLowerCase();
@@ -69,6 +73,7 @@ public class GameEngine {
                 break;
             }
 
+            // Försöker tolka riktning (t.ex. north, south osv.)
             String direction = parseDirection(command);
             if (direction != null) {
                 player.move(direction, scanner);
@@ -78,6 +83,7 @@ public class GameEngine {
                 System.out.println("I don't understand that command.");
             }
 
+               // Kontrollerar om spelaren har nått utgången
             if (player.getCurrentRoom().getName().equals("Exit")) {
                 System.out.println(
                         "Congratulations, " + player.getName()
@@ -91,10 +97,11 @@ public class GameEngine {
         scanner.close();
     }
 
-    // Check the current room for items and allow the player to pick them up
+    // Kontrollerar om det finns föremål i rummet och låter spelaren plocka upp dem
     private void checkRoomForItems(Scanner scanner) {
         Room room = player.getCurrentRoom();
         if (!room.getItems().isEmpty()) {
+            // Skriver ut alla items i rummet
             for (int i = 0; i < room.getItems().size(); i++) {
                 System.out.println("You see " + room.getItems().get(i).getDescription()
                         + " Type p to pick it up. Or press enter to ignore it.");
@@ -103,6 +110,9 @@ public class GameEngine {
             String input = scanner.nextLine().trim();
 
             if (!input.isEmpty()) {
+
+                // Om spelaren väljer att plocka upp item
+
                 if (input.equals("p") || input.equals("P")) {
                     Item picked = room.getItems().remove(0);
                     player.addItem(picked);
@@ -126,6 +136,7 @@ public class GameEngine {
         }
     }
 
+    // Kontrollerar om det finns fiender i det aktuella rummet och hanterar strid
     private void checkRoomForEnemies(Scanner scanner) {
         Room room = player.getCurrentRoom();
 
@@ -140,6 +151,7 @@ public class GameEngine {
             }
         }
         if (!room.getEnemy().isEmpty()) {
+            // Skriver ut alla fiender i rummet
             for (int i = 0; i < room.getEnemy().size(); i++) {
                 System.out.println("You encounter " + room.getEnemy().get(i).getDescription()
                         + " Prepare for battle! Press a to attack.");
@@ -150,13 +162,15 @@ public class GameEngine {
                 try {
                     if (input.equals("a")) {
                         Enemy enemy = room.getEnemy().get(0);
+
+                        // Stridsloop: körs så länge både spelaren och fienden lever
                         while (enemy.getHealth() > 0 && player.getHealth() > 0) {
                             player.attack(enemy);
 
                             if (enemy.getHealth() > 0) {
                                 enemy.attack(player);
 
-                                // Offer healing when health drops to exactly 2 or below (but still alive)
+                                 // Om spelarens hälsa är kritiskt låg (2 eller mindre, men fortfarande vid liv)
                                 if (player.getHealth() > 0 && player.getHealth() <= 2) {
                                     if (player.hasItem("Health potion")) {
                                         System.out.println("WARNING: Your health is critically low!");
@@ -164,7 +178,7 @@ public class GameEngine {
                                                 "Press h to use a health potion, or press enter to continue fighting.");
                                         System.out.print("> ");
                                         String healChoice = scanner.nextLine().trim();
-
+                        // Spelaren väljer att använda hälsodrycken
                                         if (healChoice.equals("h")) {
                                             player.heal(10);
                                             System.out.println(
@@ -180,6 +194,8 @@ public class GameEngine {
                                 }
                             }
                         }
+
+                    // Om spelaren överlever striden tas fienden bort från rummet
                         if (player.getHealth() > 0) {
                             room.removeEnemy(enemy);
                         } else {

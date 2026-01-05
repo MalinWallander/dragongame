@@ -1,11 +1,18 @@
 package dragongame;
 
+
+// Dragon ärver från Enemy-klassen
 public class Dragon extends Enemy {
 
+
+    // Konstruktor för Dragon
+    // Tar emot namn, hälsa, attackstyrka och beskrivning
+    // och skickar vidare dessa till Enemy-konstruktorn
     public Dragon(String name, int health, int attackPower, String description) {
         super(name, health, attackPower, description);
     }
 
+     // Metod som skriver ut en ASCII-bild av en drake i konsolen
     public void printAsciiDragon() {
         System.out.println(
         "                                                  .~))>>\n"+
@@ -43,12 +50,16 @@ public class Dragon extends Enemy {
         "                                              ~~~~\n"); 
 }
 
+// Överskuggar attack-metoden från Enemy
+    // Draken attackerar spelaren med eld
     @Override
     public void attack(Player player) {
         System.out.println(getName() + " breathes fire at you, dealing " + getAttackPower() + " damage!");
         player.takeDamage(getAttackPower());
     }
 
+
+    // Överskuggar takeDamage-metoden från Enemy
     @Override
     public void takeDamage(int damage) {
         super.takeDamage(damage);
