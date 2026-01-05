@@ -1,5 +1,7 @@
 package dragongame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -126,10 +128,16 @@ public class GameEngine {
 
     private void checkRoomForEnemies(Scanner scanner) {
         Room room = player.getCurrentRoom();
-        Enemy enemy = room.getEnemy().get(0);
 
-        if (enemy instanceof Dragon dragon) {
-            dragon.printAsciiDragon();
+        if (room.getEnemy().isEmpty()) {
+            return; // No enemies, nothing to do
+        }
+        List<Enemy> enemies = new ArrayList<>(room.getEnemy());
+
+        for (Enemy enemy : enemies) {
+            if (enemy instanceof Dragon dragon) {
+                dragon.printAsciiDragon();
+            }
         }
         if (!room.getEnemy().isEmpty()) {
             for (int i = 0; i < room.getEnemy().size(); i++) {
@@ -141,7 +149,7 @@ public class GameEngine {
             if (!input.isEmpty()) {
                 try {
                     if (input.equals("a")) {
-
+                        Enemy enemy = room.getEnemy().get(0);
                         while (enemy.getHealth() > 0 && player.getHealth() > 0) {
                             player.attack(enemy);
 
