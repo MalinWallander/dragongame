@@ -135,8 +135,7 @@ public class GameEngine {
                                 // Offer healing when health drops to exactly 2 or below (but still alive)
                                 if (player.getHealth() > 0 && player.getHealth() <= 2) {
                                     if (player.hasItem("Health potion")) {
-                                        System.out.println("WARNING: Your health is critically low! (Health: "
-                                                + player.getHealth() + ")");
+                                        System.out.println("WARNING: Your health is critically low!");
                                         System.out.println(
                                                 "Press h to use a health potion, or press enter to continue fighting.");
                                         System.out.print("> ");
@@ -159,17 +158,6 @@ public class GameEngine {
                         }
                         if (player.getHealth() > 0) {
                             room.removeEnemy(enemy);
-                            System.out.println("Your current health: " + player.getHealth()
-                                    + " Maybe you want to heal yourself? Type h to use a health potion. Or press enter to continue.");
-                            System.out.print("> ");
-                            String healInput = scanner.nextLine().trim();
-                            if (healInput.equals("h") && player.hasItem("Health potion")) {
-                                player.heal(10);
-                            } else if (healInput.equals("h")) {
-                                System.out.println("You don't have a health potion to use. Go explore and find one!");
-                            } else {
-                                System.out.println("You chose not to heal. Where do you want to go next?");
-                            }
                         } else {
                             System.out.println("You have been defeated by the " + enemy.getName() + ". Game over.");
                             System.exit(0);

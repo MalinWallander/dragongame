@@ -40,8 +40,8 @@ public class Player {
     }
 
     // Tar bort ett item från spelarens inventory
-    public void removeItem(Item item) {
-        inventory.remove(item);
+    public void removeItem(String itemName) {
+        inventory.remove(itemName);
     }
 
     public boolean hasItem(String itemName) {
@@ -114,6 +114,7 @@ public class Player {
     public void heal(int amount) {
         this.health += amount;
         System.out.println("You have been healed by " + amount + " points. Current health: " + this.health);
+        removeItem("Health potion");
     }
 
     public void takeDamage(int damage) {

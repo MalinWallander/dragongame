@@ -16,7 +16,7 @@ public class Goblin extends Enemy {
     public void takeDamage(int damage) {
         super.takeDamage(damage);
         if (!isAlive()) {
-            System.out.println("You have defeated the " + getName() + "!");
+            System.out.println("You have defeated the " + getName() + "! Where do you want to go next?");
         }
     }
 }

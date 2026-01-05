@@ -16,7 +16,7 @@ public class Key extends Item {
         }
 
         lockedDoor.unlock();
-        player.removeItem(this);
+        player.removeItem(this.getName());
         System.out.println("You unlocked the door with the key and can now try to walk in this direction!");
     }
 }
