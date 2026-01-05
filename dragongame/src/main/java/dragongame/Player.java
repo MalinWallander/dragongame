@@ -9,12 +9,15 @@ public class Player {
     private String name;
     private List<Item> inventory = new ArrayList<>();
     private Integer health;
+    private Integer attackPower;
 
     // Konstruktor som skapar en spelare med ett startrum och ett namn
     public Player(Room startingRoom, String name, Integer health) {
         this.currentRoom = startingRoom;
         this.name = name;
         this.health = health;
+        this.attackPower = 1; // Standard attack power utan vapen
+        this.inventory = new ArrayList<>();
     }
 
     public Room getCurrentRoom() {
@@ -33,15 +36,22 @@ public class Player {
         return health;
     }
 
+    public Integer getAttackPower() {
+        return attackPower;
+    }
+
+    public void setAttackPower(Integer attackPower) {
+        this.attackPower = attackPower;
+    }
+
     // Lägger till ett item i spelarens inventory
     public void addItem(Item item) {
         inventory.add(item);
-        System.out.println(item.getName() + " has been added to your inventory. Which direction do you want to go?");
     }
 
     // Tar bort ett item från spelarens inventory
     public void removeItem(String itemName) {
-        inventory.remove(itemName);
+        inventory.removeIf(item -> item.getName().equalsIgnoreCase(itemName));
     }
 
     public boolean hasItem(String itemName) {
@@ -126,8 +136,8 @@ public class Player {
     }
 
     public void attack(Enemy enemy) {
-        System.out.println("You attack the " + enemy.getName() + "!");
-        enemy.takeDamage(2); // Fixed damage for simplicity
+        System.out.println("You attack the " + enemy.getName() + " and deal " + attackPower + " damage!");
+        enemy.takeDamage(attackPower); // Använder spelarens attackPower för att skada fienden
         if (enemy.getHealth() <= 0) {
             currentRoom.removeEnemy(enemy);
         } else {

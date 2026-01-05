@@ -104,6 +104,14 @@ public class GameEngine {
                 if (input.equals("p") || input.equals("P")) {
                     Item picked = room.getItems().remove(0);
                     player.addItem(picked);
+                    if (picked instanceof Sword) {
+                        picked.use(player);
+                        System.out.println(
+                                "You picked up the sword! Your attack power is now " + player.getAttackPower() + ".");
+                    } else {
+                        System.out.println(
+                                picked.getName() + " has been added to your inventory. Where do you want to go next?");
+                    }
                 } else
                     System.out.println("Invalid input.");
             } else {
