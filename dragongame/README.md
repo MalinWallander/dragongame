@@ -174,3 +174,5 @@ public class MainGame {
     }
 }
 ```
+
+Projekt planerat och utfört av Klara Åström Huss och Malin Wallander
